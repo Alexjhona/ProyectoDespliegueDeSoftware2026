@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+*.iml
+node_modules/
+dist/
+.angular/cache/
+target/
+build/
+out/
+.gradle/
+*.log
+.DS_Store
+Thumbs.db
