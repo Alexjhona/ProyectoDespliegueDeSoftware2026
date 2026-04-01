@@ -1,0 +1,62 @@
+server:
+  port: ${PORT:${SERVER_PORT:0}}
+
+spring:
+  application:
+    name: ms-producto-service
+
+  # -------- CONFIGURACIÓN DEL DATASOURCE (H2 en memoria para ms_producto) --------
+  datasource:
+    url: jdbc:h2:mem:productosdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+
+  # -------- CONFIGURACIÓN DE JPA / HIBERNATE (fuera de datasource) --------
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  # -------- H2 CONSOLE --------
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+  categoria:
+    url: http://localhost:8080/api/categorias
+
+resilience4j.circuitbreaker:
+  instances:
+    productoByIdCB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 4
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+

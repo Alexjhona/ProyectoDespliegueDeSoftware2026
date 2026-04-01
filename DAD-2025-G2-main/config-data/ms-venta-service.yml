@@ -1,0 +1,44 @@
+server:
+  port: ${PORT:${SERVER_PORT:0}}
+
+spring:
+  application:
+    name: ms-venta-service
+
+  datasource:
+    url: jdbc:h2:mem:ventasdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Feign: URLs base para ms_cliente y ms_producto
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+  cliente:
+    url: http://localhost:8080/api/clientes
+  producto:
+    url: http://localhost:8080/api/productos
+  inventario: # nueva sección
+    url: http://localhost:8080/api/stock
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
