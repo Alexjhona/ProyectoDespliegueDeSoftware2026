@@ -1,29 +1,35 @@
 server:
-
-  port: ${PORT:${SERVERS_PORT:0}}
+  port: 8085
 
 spring:
-  jpa:
-    hibernate.ddl-auto: update
-    generate-ddl: true
-    show-sql: true
+  application:
+    name: ms-auth-service
+
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ms_auth
-    username: root
+    url: jdbc:h2:mem:authdb
+    driver-class-name: org.h2.Driver
+    username: sa
     password:
 
-  Application:
-    name: ms-auth-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 eureka:
   client:
-    serviceUrl:
-      #defaultZone: http://localhost:8090/eureka
+    service-url:
       defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
   instance:
-    #hostname: localhost
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 jwt:
-  secret: secret
+  secret: mi_clave_jwt_segura_2026_auth
+  expiration: 3600000

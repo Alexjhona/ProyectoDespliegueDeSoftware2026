@@ -1,18 +1,10 @@
-
-
-
-
-
-
 server:
   port: 7071
-
-
-
 
 spring:
   application:
     name: config-server
+
   cloud:
     config:
       server:
@@ -20,6 +12,7 @@ spring:
           uri: https://github.com/Alexjhona/ProyectoDespliegueDeSoftware2026.git
           searchPaths: DAD-2025-G2-main/config-data
           default-label: main
+
   security:
     user:
       name: root
