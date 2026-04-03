@@ -10,5 +10,7 @@ spring:
       server:
         git:
           uri: https://github.com/Alexjhona/ProyectoDespliegueDeSoftware2026.git
-          searchPaths: DAD-2025-G2-main/config-data
+          search-paths:
+            - DAD-2025-G2-main/config-data
           default-label: main
+          clone-on-start: true

@@ -3,4 +3,4 @@ spring:
     name: ms-registry-server
 
   config:
-    import: optional:configserver:http://localhost:7071
+    import: configserver:http://localhost:7071
