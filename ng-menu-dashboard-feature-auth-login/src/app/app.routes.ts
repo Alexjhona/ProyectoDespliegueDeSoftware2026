@@ -6,6 +6,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./shared/components/layout/layout.component'),
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -31,12 +32,6 @@ export const routes: Routes = [
         path: 'venta',
         loadComponent: () => import('./business/venta/venta.component').then(m => m.VentaComponent),
       },
-
-
-
-
-
-
       {
         path: '',
         redirectTo: 'dashboard',
@@ -46,11 +41,16 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: ()=> import('./business/authentication/login/login.component'),
+    loadComponent: () => import('./business/authentication/login/login.component').then(m => m.LoginComponent),
+    canActivate: [AuthenticatedGuard]
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./business/authentication/register/register.component').then(m => m.RegisterComponent),
     canActivate: [AuthenticatedGuard]
   },
   {
     path: '**',
-    redirectTo: 'dashboard'
-  },
+    redirectTo: 'login'
+  }
 ];
