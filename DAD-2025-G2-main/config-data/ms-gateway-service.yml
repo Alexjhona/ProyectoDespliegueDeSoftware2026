@@ -7,25 +7,18 @@ logging:
     org.springframework.cloud.gateway: debug
     org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: info
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-
 spring:
   cloud:
     gateway:
       globalcors:
-        corsConfigurations:
+        cors-configurations:
           '[/**]':
             allowedOrigins: "http://localhost:4200"
             allowedHeaders: "*"
             allowedMethods: "GET,POST,PUT,DELETE,OPTIONS"
       discovery:
         locator:
-          enable: true
+          enabled: true
       routes:
         - id: ms-auth-service
           uri: lb://ms-auth-service
@@ -37,12 +30,10 @@ spring:
           predicates:
             - Path=/api/clientes/**
 
-
         - id: ms-categoria-service
           uri: lb://ms-categoria-service
           predicates:
             - Path=/api/categorias/**
-
 
         - id: ms-proveedor-service
           uri: lb://ms-proveedor-service
@@ -68,3 +59,12 @@ spring:
           uri: lb://ms-venta-service
           predicates:
             - Path=/api/ventas/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

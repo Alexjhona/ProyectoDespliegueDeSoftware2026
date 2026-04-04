@@ -8,26 +8,30 @@ spring:
     discovery:
       enabled: true
 
-eureka:
-  client:
-    serviceUrl:
-
-      defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
-  instance:
-    #hostname: localhost
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-
   datasource:
     url: jdbc:h2:mem:ms_cliente
     driver-class-name: org.h2.Driver
     username: sa
     password: password
-    jpa:
-      database-platform: org.hibernate.dialect.H2Dialect
-    h2:
-      console:
-        enabled: true
-        path: /h2-console
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 springdoc:
   api-docs:
