@@ -5,27 +5,23 @@ spring:
   application:
     name: ms-categoria-service
 
-  # -------- CONFIGURACIÓN DEL DATASOURCE (H2 en memoria) --------
   datasource:
-    url: jdbc:h2:mem:ms_cliente
+    url: jdbc:h2:mem:ms_categoria
     driver-class-name: org.h2.Driver
     username: sa
     password: password
 
-  # -------- CONFIGURACIÓN DE JPA / HIBERNATE (fuera de datasource) --------
   jpa:
     hibernate:
-      ddl-auto: update       # <- Esto se asegura de crear/actualizar tablas ANTES de ejecutar scripts o seeders
+      ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
 
-  # -------- H2 CONSOLE --------
   h2:
     console:
       enabled: true
       path: /h2-console
 
-# -------- SPRINGDOC / SWAGGER --------
 springdoc:
   api-docs:
     enabled: true
@@ -33,15 +29,15 @@ springdoc:
     enabled: true
     path: /doc/swagger-ui.html
 
-# -------- EUREKA CLIENT --------
 eureka:
   client:
-    serviceUrl:
+    service-url:
       defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
   instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
-# -------- RESILIENCE4J (Circuit Breaker) --------
 resilience4j.circuitbreaker:
   instances:
     categoriaListarPorIdCB:

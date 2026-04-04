@@ -22,7 +22,6 @@ spring:
       enabled: true
       path: /h2-console
 
-# Feign: URLs base para ms_cliente y ms_producto
 feign:
   client:
     config:
@@ -33,12 +32,14 @@ feign:
     url: http://localhost:8080/api/clientes
   producto:
     url: http://localhost:8080/api/productos
-  inventario: # nueva sección
+  inventario:
     url: http://localhost:8080/api/stock
 
 eureka:
   client:
-    serviceUrl:
+    service-url:
       defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
   instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
