@@ -4,12 +4,10 @@ import com.example.ms_categoria.dto.CategoriaDto;
 import com.example.ms_categoria.entity.Categoria;
 import com.example.ms_categoria.repository.CategoriaRepository;
 import com.example.ms_categoria.service.CategoriaService;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -41,7 +39,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         return categoriaRepository.findAllByOrderByIdAsc()
                 .stream()
                 .map(this::mapToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

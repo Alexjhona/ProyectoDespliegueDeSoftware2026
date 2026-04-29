@@ -1,4 +1,3 @@
-// src/main/java/com/example/ms_inventario/dto/StockDto.java
 package com.example.ms_inventario.dto;
 
 public class StockDto {
@@ -6,11 +5,14 @@ public class StockDto {
     private Long productoId;
     private Integer cantidad;
 
-    public StockDto() {}
+    public StockDto() {
+        // Constructor vacío requerido para deserialización JSON.
+    }
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -18,6 +20,7 @@ public class StockDto {
     public Long getProductoId() {
         return productoId;
     }
+
     public void setProductoId(Long productoId) {
         this.productoId = productoId;
     }
@@ -25,6 +28,7 @@ public class StockDto {
     public Integer getCantidad() {
         return cantidad;
     }
+
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }

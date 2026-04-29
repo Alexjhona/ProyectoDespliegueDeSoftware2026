@@ -1,4 +1,3 @@
-// src/main/java/com/example/ms_inventario/dto/StockUpdateDto.java
 package com.example.ms_inventario.dto;
 
 import jakarta.validation.constraints.Min;
@@ -10,11 +9,14 @@ public class StockUpdateDto {
     @Min(0)
     private Integer cantidad;
 
-    public StockUpdateDto() {}
+    public StockUpdateDto() {
+        // Constructor vacío requerido para deserialización JSON.
+    }
 
     public Integer getCantidad() {
         return cantidad;
     }
+
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
