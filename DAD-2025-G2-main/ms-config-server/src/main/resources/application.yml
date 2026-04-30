@@ -2,9 +2,6 @@ server:
   port: 7071
 
 spring:
-  application:
-    name: config-server
-
   cloud:
     config:
       server:
@@ -12,5 +9,5 @@ spring:
           uri: https://github.com/Alexjhona/ProyectoDespliegueDeSoftware2026.git
           search-paths:
             - DAD-2025-G2-main/config-data
-          default-label: main
+          default-label: trabajo-calidad-tests
           clone-on-start: true
