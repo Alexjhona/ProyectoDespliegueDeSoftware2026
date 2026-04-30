@@ -24,7 +24,9 @@
         <spring-cloud.version>2022.0.2</spring-cloud.version>
         <jacoco.version>0.8.12</jacoco.version>
         <lombok.version>1.18.30</lombok.version>
-        <testcontainers.version>1.21.3</testcontainers.version>
+
+        <!-- Versión actualizada para mejorar compatibilidad con Docker/Testcontainers -->
+        <testcontainers.version>1.21.4</testcontainers.version>
 
         <sonar.coverage.jacoco.xmlReportPaths>
             ${project.basedir}/target/site/jacoco/jacoco.xml
@@ -159,6 +161,11 @@
                 <version>3.2.5</version>
                 <configuration>
                     <useModulePath>false</useModulePath>
+
+                    <!-- Compatibilidad con Docker Java/Testcontainers -->
+                    <systemPropertyVariables>
+                        <api.version>1.44</api.version>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
