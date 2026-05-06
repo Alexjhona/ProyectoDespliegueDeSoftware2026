@@ -38,7 +38,7 @@ feign:
   producto:
     url: http://localhost:8082/api/productos
   inventario:
-    url: http://localhost:8083/api/stock
+    url: http://localhost:8083
 
 eureka:
   client:
