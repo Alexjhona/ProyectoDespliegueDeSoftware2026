@@ -36,7 +36,7 @@ feign:
   proveedor:
     url: http://localhost:8087/api/proveedores
   producto:
-    url: http://localhost:8082/api/productos
+    url: http://localhost:8082
   inventario:
     url: http://localhost:8083
 
