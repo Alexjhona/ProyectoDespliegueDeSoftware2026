@@ -1,28 +1,28 @@
 server:
-  port: ${PORT:${SERVER_PORT:0}}
+  port: 8087
 
 spring:
   application:
     name: ms-proveedor-service
+
   cloud:
     discovery:
       enabled: true
 
   datasource:
-    url: jdbc:h2:mem:ms_proveedores
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: password
+    url: jdbc:mysql://localhost:3306/chinito_proveedor_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=America/Lima&allowPublicKeyRetrieval=true
+    username: root
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
 
 eureka:
   client:
@@ -31,7 +31,7 @@ eureka:
   instance:
     prefer-ip-address: true
     ip-address: 127.0.0.1
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    instance-id: ${spring.application.name}:${server.port}
 
 springdoc:
   api-docs:
@@ -43,3 +43,15 @@ springdoc:
 feign:
   sunat:
     base-url: https://api.apis.net.pe/v1
+
+resilience4j.circuitbreaker:
+  instances:
+    proveedorByIdCB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 4
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
