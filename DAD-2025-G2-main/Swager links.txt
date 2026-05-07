@@ -1,0 +1,9 @@
+Swager links
+
+http://localhost:8081/doc/swagger-ui.html  -> ms-categoria
+http://localhost:8082/doc/swagger-ui.html  -> ms-producto
+http://localhost:8083/doc/swagger-ui.html  -> ms-inventario
+http://localhost:8084/doc/swagger-ui.html  -> ms-venta
+http://localhost:8086/doc/swagger-ui.html  -> ms-cliente
+http://localhost:8087/doc/swagger-ui.html  -> ms-proveedor
+http://localhost:8088/doc/swagger-ui.html  -> ms-compra
